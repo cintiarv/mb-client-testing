@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="text-center grid grid-cols-2 gap-10 mt-10">
+    <div className="grid grid-cols-2 gap-10 mt-10 ">
       <button className="bg-pink-100 rounded-md w-44 p-5">
         <Link href="/home">Click here to go to Principal</Link>
       </button>

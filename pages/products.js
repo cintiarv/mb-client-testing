@@ -12,7 +12,6 @@ function Products() {
       },
     });
     const session = await res.json();
-    console.log("data->", session);
     window.location = session.url;
   };
   return (

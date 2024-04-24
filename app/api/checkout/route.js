@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
+const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY
 import Stripe from 'stripe'
 
-const stripe = new Stripe
-("KEY")
+const stripe = new Stripe(STRIPE_SECRET_KEY)
 
 export async function POST(request){
 
@@ -23,9 +23,11 @@ export async function POST(request){
                 quantity:1
             }
         ],
+        metadata:{
+            productId: body.id
+        },
         mode:"payment"
     })
 
-    console.log('session->', session)
     return NextResponse.json(session)
 }
