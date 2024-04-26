@@ -15,6 +15,9 @@ export default function Home() {
       <button className="bg-pink-100 rounded-md w-44 p-5">
         <Link href="/products">Go to products</Link>
       </button>
+      <button className="bg-pink-100 rounded-md w-44 p-5">
+        <Link href="/users">Go to users</Link>
+      </button>
     </div>
   );
 }
