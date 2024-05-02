@@ -11,10 +11,11 @@ mutations.DELETE_PAYMENT = gql`
 mutations.CREATE_PAYMENT = gql`
   mutation createPayment($data: PaymentInput) {
     createPayment(data: $data) {
-      reserve
-    
       paymentMethod
       amount
+      reserve{
+        _id
+      }
     }
   }
 `
