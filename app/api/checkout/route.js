@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+/* import { NextResponse } from "next/server";
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY
 import Stripe from 'stripe'
 
@@ -31,4 +31,4 @@ export async function POST(request){
     })
     await createPaymentOnDB()
     return NextResponse.json(session)
-}
+} */
