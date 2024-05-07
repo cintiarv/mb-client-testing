@@ -21,6 +21,9 @@ export default function Home() {
       <button className="bg-pink-100 rounded-md w-44 p-5">
         <Link href="/reserves">Go to you reserve detail</Link>
       </button>
+      <button className="bg-pink-100 rounded-md w-44 p-5">
+        <Link href="/checkout">CHECKOUT</Link>
+      </button>
     </div>
   );
 }
