@@ -24,6 +24,9 @@ export default function Home() {
       <button className="bg-pink-100 rounded-md w-44 p-5">
         <Link href="/checkout">CHECKOUT</Link>
       </button>
+      <button className="bg-pink-100 rounded-md w-44 p-5">
+        <Link href="/newAccount">NEW STRIPE ACCOUNT</Link>
+      </button>
     </div>
   );
 }
