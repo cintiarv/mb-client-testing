@@ -7,20 +7,45 @@ const stripe = new Stripe(STRIPE_SECRET_KEY)
 export async function POST() {
     const account = await stripe.accounts.create({
         country: 'MX',
-        default_currency:'mxn',
-        email: 'cin.ruiz@example.com',
-        controller: {
-            fees: {
-                payer: 'application',
+        default_currency: 'mxn',
+        email: 'cintiaruizv@gmail.com',
+        type: 'custom',
+        components: {
+            account_onboarding: { enabled: true },
+        },
+        capabilities: {
+            card_payments: {
+                requested: true,
             },
-            losses: {
-                payments: 'application',
-            },
-            stripe_dashboard: {
-                type: 'express',
+            transfers: {
+                requested: true,
             },
         },
     });
     console.log('account :>> ', account);
     return NextResponse.json(account)
 }
+
+
+/* export async function POST() {
+    const capability = await stripe.accounts.retrieveCapability(
+        'acct_1PDyYWPdv9FZsTKH',
+        'card_payments'
+    );
+    console.log("🚀 ~ POST ~ capability:", capability)
+    return NextResponse.json(capability)
+} */
+
+/* export async function POST() {
+    const account = await stripe.accounts.update(
+        'acct_1PDyYWPdv9FZsTKH',
+        {
+            tos_acceptance: {
+                date: 1715044954,
+                ip: '196.168.1.1',
+            }
+        }
+    );
+    console.log("🚀 ~ POST ~ account:", account)
+    return NextResponse.json(account)
+} */
