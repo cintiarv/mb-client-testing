@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 const stripe = new Stripe(STRIPE_SECRET_KEY)
 
-export async function POST() {
+/* export async function POST() {
     const account = await stripe.accounts.create({
         country: 'MX',
         default_currency: 'mxn',
@@ -25,7 +25,7 @@ export async function POST() {
     console.log('account :>> ', account);
     return NextResponse.json(account)
 }
-
+ */
 
 /* export async function POST() {
     const capability = await stripe.accounts.retrieveCapability(
@@ -49,3 +49,9 @@ export async function POST() {
     console.log("🚀 ~ POST ~ account:", account)
     return NextResponse.json(account)
 } */
+
+export async function POST() {
+
+    const account= await stripe.accounts.retrieve('acct_1PDyYWPdv9FZsTKH');
+    return NextResponse.json(account)
+}
