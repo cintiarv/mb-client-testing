@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Cancel() {
+export default function Cancel () {
   return (
     <div>
       Canceling

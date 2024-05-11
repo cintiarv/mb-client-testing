@@ -1,6 +1,6 @@
-const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY
 import Stripe from 'stripe'
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server'
+const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY
 
 const stripe = new Stripe(STRIPE_SECRET_KEY)
 
@@ -50,8 +50,7 @@ const stripe = new Stripe(STRIPE_SECRET_KEY)
     return NextResponse.json(account)
 } */
 
-export async function POST() {
-
-    const account= await stripe.accounts.retrieve('acct_1PDyYWPdv9FZsTKH');
-    return NextResponse.json(account)
+export async function POST () {
+  const account = await stripe.accounts.retrieve('acct_1PDyYWPdv9FZsTKH')
+  return NextResponse.json(account)
 }

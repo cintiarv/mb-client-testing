@@ -1,6 +1,6 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag'
 
-const queries = {};
+const queries = {}
 
 queries.GET_ALL_USERS = gql`
   query getUsers {
@@ -16,7 +16,7 @@ queries.GET_ALL_USERS = gql`
       }
     }
   }
-`;
+`
 
 queries.GET_USER_BY_ID = gql`
   query Query($clientId: ID) {
@@ -28,5 +28,5 @@ queries.GET_USER_BY_ID = gql`
       phone
     }
   }
-`;
-export default queries;
+`
+export default queries

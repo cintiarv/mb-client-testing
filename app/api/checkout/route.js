@@ -1,20 +1,19 @@
-import { NextResponse } from "next/server";
-const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY
+import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
+const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY
 
 const stripe = new Stripe(STRIPE_SECRET_KEY)
 
-export async function POST(request) {
-
+export async function POST (request) {
   const body = await request.json()
-  console.log("🚀 ~ POST ~ body:", body)
+  console.log('🚀 ~ POST ~ body:', body)
 
   const session = await stripe.checkout.sessions.create({
-    success_url: "http://localhost:3000/success",
-    line_items: [ //con todos los productos que queremos cobrar
+    success_url: 'http://localhost:3000/success',
+    line_items: [ // con todos los productos que queremos cobrar
       {
         price_data: {
-          currency: "usd",
+          currency: 'usd',
           product_data: {
             name: body.name,
             images: [body.image]
@@ -25,22 +24,21 @@ export async function POST(request) {
       }
     ],
     payment_intent_data: {
-      application_fee_amount: 123,
+      application_fee_amount: 123
     },
-    mode: "payment"
+    mode: 'payment'
   },
-    {
-      stripeAccount: 'acct_1PDFX8BCFLfeZNkg',
-    }
+  {
+    stripeAccount: 'acct_1PDFX8BCFLfeZNkg'
+  }
   )
-  //await createPaymentOnDB()
+  // await createPaymentOnDB()
   return NextResponse.json(session)
 }
 
-
 // Set your secret key. Remember to switch to your live secret key in production.
 // See your keys here: https://dashboard.stripe.com/apikeys
-/* 
+/*
 const session = await stripe.checkout.sessions.create(
   {
     line_items: [
