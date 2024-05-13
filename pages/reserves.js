@@ -5,12 +5,8 @@ import { MenuItem, TextField } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import PayButton from '@/app/components/PayButton'
 
-const schemaFormCreate = yup.object({
-  paymentMethod: yup.string(),
-  reserve: yup.string(),
-  amount: yup.number()
-})
 
 const data = {
   data: {
@@ -20,17 +16,9 @@ const data = {
   }
 }
 
-export default function Reserves () {
+export default function Reserves() {
   const [CreatePaymentMutation] = useMutation(mutations.CREATE_PAYMENT)
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-    watch
-  } = useForm({
-    resolver: yupResolver(schemaFormCreate)
-  })
+
   const onSubmit = async () => {
     try {
       await CreatePaymentMutation({
@@ -53,38 +41,14 @@ export default function Reserves () {
       <p className='mb-10'>Reserva</p>
       <form>
         <p className='subtitle'>Detalles de reserva</p>
-        <TextField
-          {...register('paymentMethod')}
-          error
-          helperText=''
-          className='w-100'
-          id='outlined-basic'
-          label='Método de pago'
-          variant='outlined'
-        />
-        <TextField
-          {...register('reserve')}
-          error
-          helperText=''
-          className='w-100'
-          id='outlined-basic'
-          label='id de reserva'
-          variant='outlined'
-        />
-        <TextField
-          {...register('amount')}
-          error
-          helperText=''
-          className='w-100'
-          id='outlined-basic'
-          label='Total'
-          variant='outlined'
-        />
-        <div />
       </form>
       <button onClick={onSubmit} className='btn-landrada desktop'>
-        Guardar
+        BUTTON ONSUBMIT
       </button>
+      <div>
+        <PayButton />
+      </div>
+
     </div>
   )
 }
