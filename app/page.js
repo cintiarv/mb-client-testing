@@ -27,6 +27,9 @@ export default function Home () {
       <button className='bg-pink-100 rounded-md w-44 p-5'>
         <Link href='/newAccount'>NEW STRIPE ACCOUNT</Link>
       </button>
+      <button className='bg-pink-100 rounded-md w-44 p-5'>
+        <Link href='/notifications'>IN THIS PAGE YOU CAN GET NOTIFICATIONS</Link>
+      </button>
     </div>
   )
 }
