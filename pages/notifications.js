@@ -9,22 +9,27 @@ export default function Notifications() {
   const [isClickNotification, setIsClickNotification] = useState(false)
   const [isClickDropDown, setIsClickDropDown] = useState(false)
 
-  /* const { socket } = useContext(SocketContext)
+  const { socket } = useContext(SocketContext)
+  //console.log("🚀 ~ Notifications ~ socket:", socket)
   useEffect(() => {
-    socket.on('notifications:current', (notifications) => {
+    socket.on('send-notification')
+    socket.on('current-notifications', (notifications) => {
       setAllNotifications(notifications.notifications)
-    })
+      console.log("🚀 ~ socket.on ~ notifications:", notifications)
 
+      console.log("🚀 ~ socket.on ~ notifications.notif:", notifications.notifications)
+    })
+    
 
     // return () => socket.off('current-notifications')
-  }, [socket]) */
-const [socket, setSocket] = useState(undefined)
+  }, [socket])
+/* const [socket, setSocket] = useState(undefined)
   useEffect(() => {
-    const socket = io('http://localhost:4000')
+    const socket = io('http://localhost:4000') //creando el socket
     console.log("🚀 ~ useEffect ~ socket:", socket)
     console.log('hello')
     setSocket(socket)
-  }, [])
+  }, []) */
   
 
 
