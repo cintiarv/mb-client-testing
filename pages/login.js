@@ -86,7 +86,7 @@ export default function Login() {
                     </label>
                     <div className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>
                       <input {...register('email')} className={errors.email ? 'error2' : ''} type='email' name='email' placeholder='usuario@email.com' />
-                      
+
                     </div>
                   </div>
                   {
@@ -113,7 +113,7 @@ export default function Login() {
                       }
                     </div>
                     <div className='input1'><input {...register('password')} className='showPassword' type='password' name='password' placeholder='*********' />
-                    
+
                     </div>
                   </div>
                   {
@@ -129,7 +129,7 @@ export default function Login() {
                   {
                     errorMessage && <p className='text-danger text-center p-2'>{errorMessage}</p>
                   }
-{/*                   <Link className='link' href='/recuperacion'>Recuperar mi contraseña</Link>
+                  {/*                   <Link className='link' href='/recuperacion'>Recuperar mi contraseña</Link>
  */}
                   <button className='text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2' href='/login' disabled={isLoading}>Iniciar sesión</button>
                 </form>

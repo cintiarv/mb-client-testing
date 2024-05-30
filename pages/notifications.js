@@ -34,8 +34,11 @@ const SettingsMenuFloat = () => {
    }, []) */
 
   useEffect(() => {
-    socket.on('notifications:current', (notifications) => {
+    socket.on('current-notifications', (notifications) => {
       setAllNotifications(notifications.notifications)
+      console.log("🚀 ~ socket.on ~ notifications:", notifications)
+
+      console.log("🚀 ~ socket.on ~ notifications.notif:", notifications.notifications)
     })
 
     // return () => socket.off('current-notifications')
@@ -147,27 +150,27 @@ const SettingsMenuFloat = () => {
                 {
                   allNotifications?.length
                     ? (
-                        allNotifications?.map((notification) => (
-                          <div key={notification?.id} className='notification-section__container-card display:flex'>
-                            <img src='/assets/images/landrada-outlined-logo.svg' alt='Logo de Landrada Desarrollos' />
-                            <div className='notification-section__container-card-description mx-4'>
-                              <p className='my-0'>{notification?.title}</p>
-                              {userAuth?.type == 'ADMIN' || userAuth?.type == 'MANAGER' || userAuth?.type == 'DIRECTOR'
-                                ? <p className='my-0'>{notification?.description}</p>
-                                : ''}
-                              <div className='display:flex'>
-                                <img src='/assets/icons/clock-icon.svg' alt='Icono de un reloj' />
+                      allNotifications?.map((notification) => (
+                        <div key={notification?.id} className='notification-section__container-card display:flex'>
+                          <img src='/assets/images/landrada-outlined-logo.svg' alt='Logo de Landrada Desarrollos' />
+                          <div className='notification-section__container-card-description mx-4'>
+                            <p className='my-0'>{notification?.title}</p>
+                            {userAuth?.type == 'ADMIN' || userAuth?.type == 'MANAGER' || userAuth?.type == 'DIRECTOR'
+                              ? <p className='my-0'>{notification?.description}</p>
+                              : ''}
+                            <div className='display:flex'>
+                              <img src='/assets/icons/clock-icon.svg' alt='Icono de un reloj' />
 
-                                <p className='my-1 mx-1'>{
+                          {/*     <p className='my-1 mx-1'>{
                                 format(new Date(notification?.date), 'dd-MMM-yyyy p') || ''
                               }
-                                </p>
-                              </div>
+                              </p> */}
                             </div>
-                            <img className='notification-section__container-card-close-icon' src='/assets/icons/icon-close-gray.svg' alt='Icono para eliminar notificación' onClick={() => handleRemoveNotification(notification._id)} />
                           </div>
-                        )).reverse()
-                      )
+                          <img className='notification-section__container-card-close-icon' src='/assets/icons/icon-close-gray.svg' alt='Icono para eliminar notificación' onClick={() => handleRemoveNotification(notification._id)} />
+                        </div>
+                      )).reverse()
+                    )
                     : <p className='text-center'>Sin notificaciones</p>
                 }.
 
