@@ -47,10 +47,11 @@ export default function Login() {
           }
         }
       })
-      setToken(data?.login?.token)
+     setToken(data?.login?.token)
+
       setIsLoading(false)
       reset({ email: '', password: '' })
-      router.push('/notifications')
+      router.push('/')
     } catch (error) {
       setErrorMessage('Credenciales inválidas')
       setIsLoading(false)

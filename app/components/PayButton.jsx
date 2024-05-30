@@ -7,8 +7,7 @@ export default function PayButton ({ cartItems }) {
   console.log("🚀 ~ process.env.REST_URLXDEWDEDE:", process.env.URL_API)
 
   const handleCheckout = () => {
-    console.log('paso x aqui')
-    console.log('url', URL_API)
+
     axios
       .post('http://localhost:4000/api/stripe/create-checkout-session', { //2do parámetro 
         cartItems,

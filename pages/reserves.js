@@ -30,9 +30,7 @@ export default function Reserves() {
           }
         }
       })
-      console.log('se logró')
     } catch (error) {
-      console.log('🚀 ~ onSubmit ~ error:', error)
     }
   }
 

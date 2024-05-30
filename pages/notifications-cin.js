@@ -15,9 +15,9 @@ export default function Notifications() {
     socket.on('send-notification')
     socket.on('current-notifications', (notifications) => {
       setAllNotifications(notifications.notifications)
-      console.log("🚀 ~ socket.on ~ notifications:", notifications)
+      //console.log("🚀 ~ socket.on ~ notifications:", notifications)
 
-      console.log("🚀 ~ socket.on ~ notifications.notif:", notifications.notifications)
+      //console.log("🚀 ~ socket.on ~ notifications.notif:", notifications.notifications)
     })
     // return () => socket.off('current-notifications')
   }, [socket])

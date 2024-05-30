@@ -14,13 +14,7 @@ queries.GET_USER_AUTHENTICATED = gql`
   query UserAuthenticated {
     userAuthenticated {
       _id
-    
       email
-      phone
-      notifications{    
-        _id
-        title
-      }
     }
   }
 `

@@ -6,7 +6,6 @@ const stripe = new Stripe(STRIPE_SECRET_KEY)
 
 export async function POST (request) {
   const body = await request.json()
-  console.log('🚀 ~ POST ~ body:', body)
 
   const session = await stripe.checkout.sessions.create({
     success_url: 'http://localhost:3000/success',

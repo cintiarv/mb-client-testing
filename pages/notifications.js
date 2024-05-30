@@ -4,18 +4,22 @@ import Image from 'next/image'
 import Link from 'next/link'
 import AuthenticateContext from '../contexts/AuthenticateContext'
 import SocketContext from '../contexts/SocketContext'
+import withAuth from '../app/components/ValidateRoute'
 
 import format from 'date-fns'
 import mutations from '../services/notifications/mutations'
+import queries from '../services/authentication/queries'
+import { useQuery } from '@apollo/client'
 
 import WrapperCard from '../app/components/WrapperCard'
 import SETTINGS_ICON from '../public/assets/icons/settings_icon.svg'
 import CLOSE_ICON from '../public/assets/icons/close-icon.svg'
 import NOTIFICATION_ICON from '../public/assets/icons/notifications-green.svg'
-import { deleteToken } from '../lib/sessionStorage'
+import { deleteToken, getToken, setToken } from '../lib/sessionStorage'
 
-const SettingsMenuFloat = () => {
-  const { userAuth, setUserAuth } = useContext(AuthenticateContext)
+const Notifications = () => {
+  const { setUserAuth, userAuth } = useContext(AuthenticateContext)
+  const { error, data, refetch } = useQuery(queries.GET_USER_AUTHENTICATED)
   const userName = userAuth ? userAuth.fullName : ''
   const userNameSplit = userName ? userName.split(' ') : ''
   const initials = (userNameSplit[0] ? userNameSplit[0]?.charAt(0) : '') + (userNameSplit[1] ? userNameSplit[1]?.charAt(0) : '')
@@ -33,19 +37,27 @@ const SettingsMenuFloat = () => {
      setNotifications(userAuth?.notifications)
    }, []) */
 
+
   useEffect(() => {
+    if (data?.userAuthenticated) {
+      refetch()
+      setUserAuth(data?.userAuthenticated)
+      if (!getToken()) {
+        setUserAuth({})
+      }
+    }
+    console.log('data :>> ', getToken());
     socket.on('current-notifications', (notifications) => {
       setAllNotifications(notifications.notifications)
-      console.log("🚀 ~ socket.on ~ notifications:", notifications)
-
-      console.log("🚀 ~ socket.on ~ notifications.notif:", notifications.notifications)
+      /*  console.log("🚀 ~ socket.on ~ notifications:", notifications)
+ 
+       console.log("🚀 ~ socket.on ~ notifications.notif:", notifications.notifications) */
     })
 
     // return () => socket.off('current-notifications')
   }, [socket])
 
   useEffect(() => {
-    console.log('userAuth :>> ', userAuth);
     socket.on('send-notification', (newNotification) => {
       setAllNotifications([newNotification, ...allNotifications])
       document.querySelector('.notification.circle.red').classList.add('active')
@@ -83,7 +95,7 @@ const SettingsMenuFloat = () => {
   }
 
   const logout = () => {
-    deleteToken()
+    //deleteToken()
     setUserAuth({})
     router.push('/')
   }
@@ -143,7 +155,6 @@ const SettingsMenuFloat = () => {
         <div className='display:flex flex-row-reverse bd-highlight'>
           <div className={isClickNotification ? 'notification-section' : 'display:none'}>
             <WrapperCard
-              icon={NOTIFICATION_ICON}
               title='Notificaciones'
             >
               <div className='notification-section__container'>
@@ -151,17 +162,16 @@ const SettingsMenuFloat = () => {
                   allNotifications?.length
                     ? (
                       allNotifications?.map((notification) => (
-                        <div key={notification?.id} className='notification-section__container-card display:flex'>
-                          <img src='/assets/images/landrada-outlined-logo.svg' alt='Logo de Landrada Desarrollos' />
+                        <div key={notification?._id} className='notification-section__container-card display:flex'>
                           <div className='notification-section__container-card-description mx-4'>
-                            <p className='my-0'>{notification?.title}</p>
+                            <p className='my-0'>title: {notification?.title}</p>
                             {userAuth?.type == 'ADMIN' || userAuth?.type == 'MANAGER' || userAuth?.type == 'DIRECTOR'
                               ? <p className='my-0'>{notification?.description}</p>
                               : ''}
                             <div className='display:flex'>
                               <img src='/assets/icons/clock-icon.svg' alt='Icono de un reloj' />
 
-                          {/*     <p className='my-1 mx-1'>{
+                              {/*     <p className='my-1 mx-1'>{
                                 format(new Date(notification?.date), 'dd-MMM-yyyy p') || ''
                               }
                               </p> */}
@@ -172,9 +182,7 @@ const SettingsMenuFloat = () => {
                       )).reverse()
                     )
                     : <p className='text-center'>Sin notificaciones</p>
-                }.
-
-                .
+                }
               </div>
             </WrapperCard>
           </div>
@@ -184,4 +192,4 @@ const SettingsMenuFloat = () => {
   )
 }
 
-export default SettingsMenuFloat
+export default withAuth(Notifications)

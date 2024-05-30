@@ -1,7 +1,6 @@
 import React from 'react'
 
 export default function NewAcount () {
-  console.log('paso x aqui :>> ')
   const handleCreate = async () => {
     const res = await fetch('/api/accounts', {
       method: 'POST',
@@ -11,7 +10,6 @@ export default function NewAcount () {
       }
     })
     const account = await res.json()
-    console.log('🚀 ~ handleCreate ~ account:', account)
     window.location = account.url
   }
   return (
