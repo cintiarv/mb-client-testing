@@ -4,7 +4,6 @@ import { useQuery, useMutation } from '@apollo/client'
 
 const Users = () => {
   const { loading, data, refetch } = useQuery(queries.GET_ALL_USERS)
-  console.log('🚀 ~ Users ~ data:', data)
 
   return (
     <div>

@@ -12,7 +12,6 @@ export async function POST (request) {
   // console.log("🚀 ~ POST ~ body:", body)
   const headersList = headers()
   const sign = headersList.get('stripe-signature')
-  console.log('🚀 ~ POST ~ sign:', sign)
 
   let event // pueden llegar muchos tipos de events, en este caso solo habilitamos el "checkout" event
 

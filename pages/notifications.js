@@ -46,7 +46,6 @@ const Notifications = () => {
         setUserAuth({})
       }
     }
-    console.log('data :>> ', getToken());
     socket.on('current-notifications', (notifications) => {
       setAllNotifications(notifications.notifications)
       /*  console.log("🚀 ~ socket.on ~ notifications:", notifications)
