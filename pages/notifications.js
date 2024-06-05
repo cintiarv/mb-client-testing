@@ -39,13 +39,7 @@ const Notifications = () => {
 
 
   useEffect(() => {
-    if (data?.userAuthenticated) {
-      refetch()
-      setUserAuth(data?.userAuthenticated)
-      if (!getToken()) {
-        setUserAuth({})
-      }
-    }
+
     socket.on('current-notifications', (notifications) => {
       setAllNotifications(notifications.notifications)
       /*  console.log("🚀 ~ socket.on ~ notifications:", notifications)
@@ -67,7 +61,7 @@ const Notifications = () => {
 
   const handleRemoveNotification = (idNotification) => {
     socket.emit('remove-notification', (idNotification))
-  }
+  } 
 
   const handleClickBtn = () => {
     setIcon(CLOSE_ICON)
