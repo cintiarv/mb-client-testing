@@ -19,6 +19,7 @@ import { deleteToken, getToken, setToken } from '../lib/sessionStorage'
 
 const Notifications = () => {
   const { setUserAuth, userAuth } = useContext(AuthenticateContext)
+  console.log("🚀 ~ Notifications ~ userAuth:", userAuth)
   const { error, data, refetch } = useQuery(queries.GET_USER_AUTHENTICATED)
   const userName = userAuth ? userAuth.fullName : ''
   const userNameSplit = userName ? userName.split(' ') : ''
