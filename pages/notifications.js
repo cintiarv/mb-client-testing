@@ -54,7 +54,10 @@ const Notifications = () => {
   useEffect(() => {
     socket.on('send-notification', (newNotification) => {
       setAllNotifications([newNotification, ...allNotifications])
-      document.querySelector('.notification.circle.red').classList.add('active')
+      console.log("🚀 ~ socket.on ~ newNotification:", newNotification)
+      console.log("🚀 ~ socket.on ~ allNotifications:", allNotifications)
+      console.log('ENVIANDO NOTIFS')
+      //document.querySelector('.notification.circle.red').classList.add('active')
     })
 
     return () => socket.off('send-notification')
