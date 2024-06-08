@@ -19,7 +19,6 @@ import { deleteToken, getToken, setToken } from '../lib/sessionStorage'
 
 const Notifications = () => {
   const { setUserAuth, userAuth } = useContext(AuthenticateContext)
-  console.log("🚀 ~ Notifications ~ userAuth:", userAuth)
   const { error, data, refetch } = useQuery(queries.GET_USER_AUTHENTICATED)
   const userName = userAuth ? userAuth.fullName : ''
   const userNameSplit = userName ? userName.split(' ') : ''
@@ -40,7 +39,9 @@ const Notifications = () => {
 
 
   useEffect(() => {
-
+    socket.on("message", (message) => {
+      console.log("🚀 ~ socket.on ~ message:", message)
+    })
     socket.on('current-notifications', (notifications) => {
       setAllNotifications(notifications.notifications)
       /*  console.log("🚀 ~ socket.on ~ notifications:", notifications)
@@ -52,12 +53,13 @@ const Notifications = () => {
   }, [socket])
 
   useEffect(() => {
-    socket.on('new-notification', (newNotification) => {
+
+    socket.on('send-notification', (newNotification) => {
       setAllNotifications([newNotification, ...allNotifications])
       console.log("🚀 ~ socket.on ~ newNotification:", newNotification)
       console.log("🚀 ~ socket.on ~ allNotifications:", allNotifications)
       console.log('ENVIANDO NOTIFS')
-      //document.querySelector('.notification.circle.red').classList.add('active')
+      //document.querySelector('.notification.circle.red').classList.add('active') clase del circulito rojo
     })
 
     return () => socket.off('send-notification')
@@ -65,7 +67,12 @@ const Notifications = () => {
 
   const handleRemoveNotification = (idNotification) => {
     socket.emit('remove-notification', (idNotification))
-  } 
+  }
+
+/*   const sendNotification = () => {
+    socket.emit("new-notification", {title:"new notif from client testing!"})
+    console.log('i just send a notif')
+  } */
 
   const handleClickBtn = () => {
     setIcon(CLOSE_ICON)
@@ -101,7 +108,8 @@ const Notifications = () => {
     <>
       <div className='col-12 display:flex flex-row-reverse bd-highlight px-4'>
         <div className='settings'>
-          <div className='settings-btn display:none d-lg-block d-lg-flex' onClick={handleClickBtn}>
+{/*           <button onClick={sendNotification}>Click here to send a notification</button>
+ */}          <div className='settings-btn display:none d-lg-block d-lg-flex' onClick={handleClickBtn}>
             <Image src={icon} alt='Icono de configuracion' />
           </div>
           <div className={isClickSettings ? 'settings-content show-settings display:none d-lg-block d-lg-flex' : 'display:none'}>

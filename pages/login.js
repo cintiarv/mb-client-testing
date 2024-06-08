@@ -49,13 +49,10 @@ export default function Login() {
       })
       console.log('data :>> ', data);
       setToken(data?.login?.token)
-      console.log("🚀 ~ onSubmit ~ data?.login?.token:", data?.login?.token)
-
       setIsLoading(false)
       reset({ email: '', password: '' })
       router.push('/')
     } catch (error) {
-      console.log("🚀 ~ onSubmit ~ error:", error)
       setErrorMessage('Credenciales inválidas')
       setIsLoading(false)
     }
