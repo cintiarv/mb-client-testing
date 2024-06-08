@@ -52,7 +52,7 @@ const Notifications = () => {
   }, [socket])
 
   useEffect(() => {
-    socket.on('send-notification', (newNotification) => {
+    socket.on('new-notification', (newNotification) => {
       setAllNotifications([newNotification, ...allNotifications])
       console.log("🚀 ~ socket.on ~ newNotification:", newNotification)
       console.log("🚀 ~ socket.on ~ allNotifications:", allNotifications)
