@@ -18,7 +18,7 @@ const schemaValidationLogin = Yup.object().shape({
   password: Yup.string().required('Campo Requerido')
 })
 
-export default function Login() {
+export default function Login () {
   const [errorMessage, setErrorMessage] = useState(null)
   const [isShowPassword, setIsShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -43,11 +43,10 @@ export default function Login() {
         variables: {
           data: {
             email: dataToSend.email,
-            password: dataToSend.password,
+            password: dataToSend.password
           }
         }
       })
-      console.log('data :>> ', data);
       setToken(data?.login?.token)
       setIsLoading(false)
       reset({ email: '', password: '' })
@@ -71,11 +70,9 @@ export default function Login() {
       <div className='background-flower' />
       <section className='container-fluid main-container-image-login '>
         <div className='row'>
-          <div className='d-block d-lg-none col-12 text-center welcome'>
-          </div>
+          <div className='d-block d-lg-none col-12 text-center welcome' />
           <div className='login'>
-            <div className='d-none d-lg-block col-7 welcome'>
-            </div>
+            <div className='d-none d-lg-block col-7 welcome' />
             <div className='col-12 col-lg-5 login__card'>
               <h3>Inicia sesión</h3>
               <div className='separator' />
@@ -100,17 +97,17 @@ export default function Login() {
                       {
                         isShowPassword
                           ? <Image
-                            className='input-lable-group__show-img'
-                            src='/assets/icons/icon-view-outline-gray.webp' alt='Icono de ocultar contraseña' loading='lazy' width={18}
-                            height={18}
-                            onClick={() => handleClickShowPassword()}
-                          />
+                              className='input-lable-group__show-img'
+                              src='/assets/icons/icon-view-outline-gray.webp' alt='Icono de ocultar contraseña' loading='lazy' width={18}
+                              height={18}
+                              onClick={() => handleClickShowPassword()}
+                            />
                           : <Image
-                            className='input-lable-group__show-img'
-                            src='/assets/icons/icon-visibility-off.svg' alt='Icono de ocultar contraseña' loading='lazy' width={18}
-                            height={18}
-                            onClick={() => handleClickShowPassword()}
-                          />
+                              className='input-lable-group__show-img'
+                              src='/assets/icons/icon-visibility-off.svg' alt='Icono de ocultar contraseña' loading='lazy' width={18}
+                              height={18}
+                              onClick={() => handleClickShowPassword()}
+                            />
                       }
                     </div>
                     <div className='input1'><input {...register('password')} className='showPassword' type='password' name='password' placeholder='*********' />

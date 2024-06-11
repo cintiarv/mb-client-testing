@@ -7,7 +7,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import PayButton from '@/app/components/PayButton'
 
-
 const data = {
   data: {
     reserve: '661c3201e61a92bc2c83e4ce',
@@ -16,7 +15,7 @@ const data = {
   }
 }
 
-export default function Reserves() {
+export default function Reserves () {
   const [CreatePaymentMutation] = useMutation(mutations.CREATE_PAYMENT)
 
   const onSubmit = async () => {

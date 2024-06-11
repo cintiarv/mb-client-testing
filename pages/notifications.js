@@ -37,29 +37,18 @@ const Notifications = () => {
      setNotifications(userAuth?.notifications)
    }, []) */
 
-
   useEffect(() => {
-    socket.on("message", (message) => {
-      console.log("🚀 ~ socket.on ~ message:", message)
-    })
     socket.on('current-notifications', (notifications) => {
       setAllNotifications(notifications.notifications)
-      /*  console.log("🚀 ~ socket.on ~ notifications:", notifications)
- 
-       console.log("🚀 ~ socket.on ~ notifications.notif:", notifications.notifications) */
     })
 
     // return () => socket.off('current-notifications')
   }, [socket])
 
   useEffect(() => {
-
     socket.on('send-notification', (newNotification) => {
       setAllNotifications([newNotification, ...allNotifications])
-      console.log("🚀 ~ socket.on ~ newNotification:", newNotification)
-      console.log("🚀 ~ socket.on ~ allNotifications:", allNotifications)
-      console.log('ENVIANDO NOTIFS')
-      //document.querySelector('.notification.circle.red').classList.add('active') clase del circulito rojo
+      // document.querySelector('.notification.circle.red').classList.add('active') clase del circulito rojo
     })
 
     return () => socket.off('send-notification')
@@ -68,12 +57,6 @@ const Notifications = () => {
   const handleRemoveNotification = (idNotification) => {
     socket.emit('remove-notification', (idNotification))
   }
-
-/*   const sendNotification = () => {
-    socket.emit("new-notification", {title:"new notif from client testing!"})
-    console.log('i just send a notif')
-  } */
-
   const handleClickBtn = () => {
     setIcon(CLOSE_ICON)
     setAllNotifications(userAuth?.notifications)
@@ -99,7 +82,7 @@ const Notifications = () => {
   }
 
   const logout = () => {
-    //deleteToken()
+    // deleteToken()
     setUserAuth({})
     router.push('/')
   }
@@ -108,8 +91,7 @@ const Notifications = () => {
     <>
       <div className='col-12 display:flex flex-row-reverse bd-highlight px-4'>
         <div className='settings'>
-{/*           <button onClick={sendNotification}>Click here to send a notification</button>
- */}          <div className='settings-btn display:none d-lg-block d-lg-flex' onClick={handleClickBtn}>
+          <div className='settings-btn display:none d-lg-block d-lg-flex' onClick={handleClickBtn}>
             <Image src={icon} alt='Icono de configuracion' />
           </div>
           <div className={isClickSettings ? 'settings-content show-settings display:none d-lg-block d-lg-flex' : 'display:none'}>
@@ -166,26 +148,27 @@ const Notifications = () => {
                 {
                   allNotifications?.length
                     ? (
-                      allNotifications?.map((notification) => (
-                        <div key={notification?._id} className='notification-section__container-card display:flex'>
-                          <div className='notification-section__container-card-description mx-4'>
-                            <p className='my-0'>title: {notification?.title}</p>
-                            {userAuth?.type == 'ADMIN' || userAuth?.type == 'MANAGER' || userAuth?.type == 'DIRECTOR'
+                        allNotifications?.map((notification) => (
+                          <div key={notification?._id} className='notification-section__container-card display:flex'>
+                            <div className='notification-section__container-card-description mx-4'>
+                              <p className='my-0'>title: {notification?.title}</p>
+                              <p className='my-0'>{notification?.description}</p>
+                              {/*     {userAuth?.type == 'ADMIN' || userAuth?.type == 'MANAGER' || userAuth?.type == 'DIRECTOR'
                               ? <p className='my-0'>{notification?.description}</p>
-                              : ''}
-                            <div className='display:flex'>
-                              <img src='/assets/icons/clock-icon.svg' alt='Icono de un reloj' />
+                              : ''} */}
+                              <div className='display:flex'>
+                                <img src='/assets/icons/clock-icon.svg' alt='Icono de un reloj' />
 
-                              {/*     <p className='my-1 mx-1'>{
+                                {/*     <p className='my-1 mx-1'>{
                                 format(new Date(notification?.date), 'dd-MMM-yyyy p') || ''
                               }
                               </p> */}
+                              </div>
                             </div>
+                            <img className='notification-section__container-card-close-icon' src='/assets/icons/icon-close-gray.svg' alt='Icono para eliminar notificación' onClick={() => handleRemoveNotification(notification._id)} />
                           </div>
-                          <img className='notification-section__container-card-close-icon' src='/assets/icons/icon-close-gray.svg' alt='Icono para eliminar notificación' onClick={() => handleRemoveNotification(notification._id)} />
-                        </div>
-                      )).reverse()
-                    )
+                        )).reverse()
+                      )
                     : <p className='text-center'>Sin notificaciones</p>
                 }
               </div>

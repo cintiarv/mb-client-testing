@@ -13,5 +13,4 @@ subscriptions.NEW_NOTIFICATION = gql`
   }
 `
 
-
 export default subscriptions

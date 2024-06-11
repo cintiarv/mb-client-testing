@@ -4,9 +4,7 @@ import { SocketProvider } from '../contexts/SocketContext'
 import client from '../lib/apollo'
 import 'tailwindcss/tailwind.css'
 
-
-
-function MyApp({ Component, pageProps }) {
+function MyApp ({ Component, pageProps }) {
   return (
     <ApolloProvider client={client}>
       <AuthenticateProvider>

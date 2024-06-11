@@ -6,9 +6,9 @@ const AuthenticateProvider = ({ children }) => {
   const [userAuth, setUserAuth] = useState({})
 
   const data = { userAuth, setUserAuth }
-useEffect(() => {
+  useEffect(() => {
 
-}, [])
+  }, [])
 
   return (
     <AuthenticateContext.Provider value={data}>
