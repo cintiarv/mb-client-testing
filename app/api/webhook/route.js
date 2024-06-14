@@ -9,7 +9,6 @@ const ENDPOINT_SECRET = process.env.ENDPOINT_SECRET
 
 export async function POST (request) {
   const body = await request.text()
-  // console.log("🚀 ~ POST ~ body:", body)
   const headersList = headers()
   const sign = headersList.get('stripe-signature')
 

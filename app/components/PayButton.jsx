@@ -4,7 +4,6 @@ const URL_API = process.env.URL_API
 export default function PayButton ({ cartItems }) {
   // const user = useSelector((state) => state.auth);
   // <console.log("🚀 ~ PayButton ~ user:", user)
-  console.log('🚀 ~ process.env.REST_URLXDEWDEDE:', process.env.URL_API)
 
   const handleCheckout = () => {
     axios
